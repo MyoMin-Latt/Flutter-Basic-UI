@@ -2,43 +2,35 @@
 // @12.2 Setting up in VS code
 // @12.3 Flutter Basic UI (First App and Widget) => Widget , Material App Widget
 // @12.4 Flutter Basic UI (AppBar , Icon, Floating action button)
+// @12.5 Flutter Basic UI (TextWidget)
+// @12.6 Flutter Basic UI (Container)
+// @12.7 Flutter Basic UI(Image Widget)
+
+
 
 import 'package:flutter/material.dart';
 
-//Google => Material 
+//Google => Material
 //Iphone => Cupertino
-//Widget => stateless, stateful
+//Widget => less ,ful
 //debug //release // hybrid
-void main(){
-  runApp(
-    const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: FirstApp(),
-    )
-  );
+//Container
+//project file network memory
+void main() {
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: FirstApp(),
+  ));
 }
+
 class FirstApp extends StatelessWidget {
-  const FirstApp({ Key? key }) : super(key: key);
+  const FirstApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-            print('Click');
-        },
-        child: Icon(Icons.access_alarm),
-      ),
-      body: const Center(child: Text('Hello')),
-      appBar:  AppBar(
-        centerTitle: true,
-        actions: [
-          Icon(Icons.settings,size: 30,color: Colors.red, ),
-          Center(child: Text('Setting'))
-        ],
-        leading: FlutterLogo(),
-        title: Text('First App'),
-      )
-    );
+    return Scaffold(
+       appBar: AppBar(),
+       body: Image.network('https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/IMG-20200708-WA0006.jpg/440px-IMG-20200708-WA0006.jpg')
+       );
   }
 }
