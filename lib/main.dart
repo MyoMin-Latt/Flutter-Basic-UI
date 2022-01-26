@@ -5,7 +5,7 @@
 // @12.5 Flutter Basic UI (TextWidget)
 // @12.6 Flutter Basic UI (Container)
 // @12.7 Flutter Basic UI(Image Widget)
-
+// @12.8 Flutter Basic UI (Rich Text Widget)
 
 
 import 'package:flutter/material.dart';
@@ -30,7 +30,21 @@ class FirstApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(),
-       body: Image.network('https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/IMG-20200708-WA0006.jpg/440px-IMG-20200708-WA0006.jpg')
+       body: Center(
+         child: 
+        //  Text.rich(RichText)
+         RichText(
+           text: const TextSpan(
+             children: [
+               TextSpan(text: 'H',style: TextStyle(color : Colors.blue,fontSize: 25),),
+               TextSpan(text: 'E',style: TextStyle(color : Colors.red,fontSize: 35)),
+               TextSpan(text: 'L',style: TextStyle(color : Colors.green,fontSize: 35)),
+               TextSpan(text: 'L',style: TextStyle(color : Colors.pink,fontSize: 35)),
+               TextSpan(text: 'O',style: TextStyle(color : Colors.black,fontSize: 35)),
+             ]
+           ),
+         ),
+       )
        );
   }
 }
