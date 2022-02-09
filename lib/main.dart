@@ -14,6 +14,8 @@
 // @12.13 Flutter Basic UI (Stack Layout), Positioned, container
 // @12.14 (Stack interactive UI) https://youtu.be/buhVyKjkDtY
 // @12.15 Flutter Basic UI (ListView & Card Widget) Inkwell
+// @12.16 Flutter Basic UI (GridView) SliverGridDelegateWithFixedCrossAxisCount
+
 
 
 import 'package:flutter/material.dart';
@@ -36,37 +38,47 @@ void main() {
 }
 
 class FirstApp extends StatelessWidget {
-  List<String> list = List.generate(100, (index) => 'Item $index');
+  final List<String> _items = List.generate(1000, (index) => "Item $index");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        body: ListView.builder(
-          itemCount: list.length,
-          itemBuilder: (BuildContext context, int position){
-            return InkWell(
-              onTap: (){
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(list[position]), 
-                  action: SnackBarAction(label: 'Cancel', onPressed: (){},),)
-                );
-              },
-              child: Card(
-                margin: EdgeInsets.all(2),
-                elevation: 0,
-                child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(list[position]),
-              )),
+        body: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisExtent: 50,
+              // childAspectRatio: 3/1,
+              crossAxisCount: 2,
+                mainAxisSpacing: 3.0,
+                crossAxisSpacing: 3.0
+            ),
+            // itemCount: 10,
+            itemBuilder: _item),
             );
-          }
-        ),
-        // body: ListView(
-        //   children: [
-        //     for (var item in list)
-        //     Text(item)
-        //   ],
-        // )
-        );
+  }
+
+  Widget _item(BuildContext context, int index) {
+    if(index %7 == 0){
+      return ElevatedButton(onPressed: (){
+         ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(_items[index])));
+
+      }, child: Text(_items[index]));
+    }
+    return
+     InkWell(
+      onTap: (){
+        ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(_items[index])));
+      },
+      child: Card(
+        margin: EdgeInsets.zero,
+        child: Container(
+          color: Colors.yellow,
+          alignment: Alignment.center,
+          child: Text(_items[index])),
+      ),
+    );
   }
 }
+
