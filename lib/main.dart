@@ -16,8 +16,6 @@
 // @12.15 Flutter Basic UI (ListView & Card Widget) Inkwell
 // @12.16 Flutter Basic UI (GridView) SliverGridDelegateWithMaxCrossAxisExtent, SliverGridDelegateWithFixedCrossAxisCount
 
-
-
 import 'package:flutter/material.dart';
 
 //Google => Material
@@ -32,53 +30,51 @@ import 'package:flutter/material.dart';
 //position
 void main() {
   runApp(MaterialApp(
+    theme: ThemeData.dark(),
+    // themeMode: ThemeMode.dark,
     debugShowCheckedModeBanner: false,
     home: FirstApp(),
   ));
 }
 
 class FirstApp extends StatelessWidget {
-  final List<String> _items = List.generate(1000, (index) => "Item $index");
-
+  List<_contactObject> _contactList = [
+    _contactObject('https://randomuser.me/api/portraits/women/81.jpg', 'Ma Ma', '@mama'),
+    _contactObject('https://randomuser.me/api/portraits/women/82.jpg', 'Su Su', '@susu'),
+    _contactObject('https://randomuser.me/api/portraits/women/83.jpg', 'Mu Mu', '@mumu'),
+    _contactObject('https://randomuser.me/api/portraits/women/84.jpg', 'Maw Maw', '@mawmaw'),
+    _contactObject('https://randomuser.me/api/portraits/women/85.jpg', 'Mee Mee', '@meemee'),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 130,
-              mainAxisExtent: 50,
-              // childAspectRatio: 3/1,
-                mainAxisSpacing: 3.0,
-                crossAxisSpacing: 3.0
-            ),
-            // itemCount: 10,
-            itemBuilder: _item),
-            );
-  }
-
-  Widget _item(BuildContext context, int index) {
-    if(index %7 == 0){
-      return ElevatedButton(onPressed: (){
-         ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(_items[index])));
-
-      }, child: Text(_items[index]));
-    }
-    return
-     InkWell(
-      onTap: (){
-        ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(_items[index])));
-      },
-      child: Card(
-        margin: EdgeInsets.zero,
-        child: Container(
-          color: Colors.yellow,
-          alignment: Alignment.center,
-          child: Text(_items[index])),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Contact List'),
       ),
+      body: ListView.builder(
+        itemCount: _contactList.length,
+        itemBuilder: (BuildContext context, int position){
+          return _contactListTile(_contactList[position]);
+        }
+      ),
+    );
+  }
+  Widget _contactListTile(_contactObject contactObject){
+    return ListTile(
+      leading: CircleAvatar(
+        radius: 30,
+        backgroundImage: NetworkImage(contactObject.url)),
+      title: Text(contactObject.name),
+      subtitle: Text(contactObject.id),
+      trailing: ElevatedButton(onPressed: (){}, child: Text('Follow')),
     );
   }
 }
 
+class _contactObject{
+  String url;
+  String name;
+  String id;
+  _contactObject(this.url, this.name, this.id);
+}
