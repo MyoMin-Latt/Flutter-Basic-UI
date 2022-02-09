@@ -55,6 +55,7 @@ class _MyAppState extends State<MyApp> {
   TextEditingController _address = TextEditingController();
   List<bool> _hobbyBool = [false, false, false];
   List<String> _hobbyList =['Reading', 'Swimming', 'Walking'];
+  String _hobby = '';
   
   @override
   Widget build(BuildContext context) {
@@ -80,7 +81,7 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: TextField(
                 controller: _password,
                 // scrollPadding: EdgeInsets.all(0),
@@ -142,8 +143,9 @@ class _MyAppState extends State<MyApp> {
   String? hobbyString(){
     String _hobby = '';
     for(int i=0; i<_hobbyBool.length; i++){
+      print(i.toString() + 'number');
       if(_hobbyBool[i]){
-        _hobby += _hobbyList[i];
+        _hobby += _hobbyList[i] + " ";
       }      
     }
     return _hobby;
