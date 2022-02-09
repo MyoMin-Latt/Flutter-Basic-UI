@@ -6,6 +6,8 @@
 // @12.6 Flutter Basic UI (Container)
 // @12.7 Flutter Basic UI(Image Widget)
 // @12.8 Flutter Basic UI (Rich Text Widget)
+// @12.9 Flutter Basic UI (Row and Column)
+
 
 
 import 'package:flutter/material.dart';
@@ -16,6 +18,9 @@ import 'package:flutter/material.dart';
 //debug //release // hybrid
 //Container
 //project file network memory
+//Row Column Stack ListVeiw GridView
+//variable List Map Set
+// 6 3 3
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -30,21 +35,29 @@ class FirstApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(),
-       body: Center(
-         child: 
-        //  Text.rich(RichText)
-         RichText(
-           text: const TextSpan(
-             children: [
-               TextSpan(text: 'H',style: TextStyle(color : Colors.blue,fontSize: 25),),
-               TextSpan(text: 'E',style: TextStyle(color : Colors.red,fontSize: 35)),
-               TextSpan(text: 'L',style: TextStyle(color : Colors.green,fontSize: 35)),
-               TextSpan(text: 'L',style: TextStyle(color : Colors.pink,fontSize: 35)),
-               TextSpan(text: 'O',style: TextStyle(color : Colors.black,fontSize: 35)),
-             ]
+       body: Column(children: [
+         Expanded(
+           flex: 6,
+           child: Container(
+             color: Colors.red,
            ),
          ),
-       )
+         Expanded(
+           flex: 3,
+           child: Container(
+             color: Colors.blue,
+           ),
+         ),
+         Flexible(
+           flex: 3,
+           child: Container(
+             color: Colors.green,
+           ),
+         )
+       ],),
+
+      
        );
   }
 }
+
