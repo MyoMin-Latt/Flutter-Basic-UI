@@ -6,8 +6,8 @@
 // @12.6 Flutter Basic UI (Container)
 // @12.7 Flutter Basic UI(Image Widget)
 // @12.8 Flutter Basic UI (Rich Text Widget)
-// @12.9 Flutter Basic UI (Row and Column)
-
+// @12.9 Flutter Basic UI (Row and Column), Expanded, Flexible
+//        Expanded => take all space, Flexible => take needed space
 
 
 import 'package:flutter/material.dart';
@@ -30,31 +30,36 @@ void main() {
 
 class FirstApp extends StatelessWidget {
   const FirstApp({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(),
-       body: Column(children: [
-         Expanded(
-           flex: 6,
-           child: Container(
-             color: Colors.red,
+       body: Row(
+         children: [
+           Container(
+             width: 50,
+             height: 200,
+             color: Colors.orange,
+             child: Text('Hello'),
            ),
-         ),
-         Expanded(
-           flex: 3,
-           child: Container(
-             color: Colors.blue,
+           Expanded(
+             child: Container(
+               width: 50,
+               height: 200,
+               color: Colors.green,
+               child: Text('Hello' *100),
+             ),
            ),
-         ),
-         Flexible(
-           flex: 3,
-           child: Container(
-             color: Colors.green,
+           Flexible(
+             child: Container(  
+               color: Colors.red,
+               child: Text('Hello'),
+               
+             ),
            ),
-         )
-       ],),
+         ],
+       )
 
       
        );
