@@ -31,6 +31,8 @@
 
 // @12.18 Flutter Basic UI (Introduction to Stateful Widget)
 // @12.19 Flutter Basic UI [TextField Widget]
+// @12.20 Flutter Basic UI [CheckBox Widget] forloop
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -51,11 +53,9 @@ class _MyAppState extends State<MyApp> {
   TextEditingController _name = TextEditingController();
   TextEditingController _password = TextEditingController();
   TextEditingController _address = TextEditingController();
-  @override
-  void initState() {
-    _name.text = "Initial Name";
-    super.initState();
-  }
+  List<bool> _hobbyBool = [false, false, false];
+  List<String> _hobbyList =['Reading', 'Swimming', 'Walking'];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,56 +63,89 @@ class _MyAppState extends State<MyApp> {
         centerTitle: true,
         title: Text('Introduction to Stateful Widget'),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _name,
-              decoration: InputDecoration(
-                  labelText: 'Name',
-                  hintText: 'Enter your name',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  )),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: _name,
+                decoration: InputDecoration(
+                    labelText: 'Name',
+                    hintText: 'Enter your name',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    )),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _password,
-              // scrollPadding: EdgeInsets.all(0),
-              obscureText: true,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  // contentPadding: EdgeInsets.zero,
-                  hintText: 'Enter your password',
-                  labelText: 'Password',
-                  suffixIcon: Icon(Icons.visibility)),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: _password,
+                // scrollPadding: EdgeInsets.all(0),
+                obscureText: true,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    // contentPadding: EdgeInsets.zero,
+                    hintText: 'Enter your password',
+                    labelText: 'Password',
+                    suffixIcon: Icon(Icons.visibility)),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _address,
-              decoration: InputDecoration(
-                  label: Text('Address'), hintText: 'Enter your address'),
-              minLines: 2,
-              maxLines: 5,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: _address,
+                decoration: InputDecoration(
+                    label: Text('Address'), hintText: 'Enter your address'),
+                minLines: 2,
+                maxLines: 5,
+              ),
             ),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _address.text = '';
-                });
-              },
-              child: Text('Save')),
-          Text(
-              'Your information is\nName is : ${_name.text}\nPassword is : ${_password.text}\nAddress is : ${_address.text}')
-        ],
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    // _address.text = '';
+                  });
+                },
+                child: Text('Save')),
+            CheckboxListTile(
+              title: Text(_hobbyList[0]),
+              value: _hobbyBool[0], onChanged: (check){
+              setState(() {
+                _hobbyBool[0] = check!;
+              });
+            }),
+            CheckboxListTile(
+              title: Text(_hobbyList[1]),
+              value: _hobbyBool[1], onChanged: (check){
+              setState(() {
+                _hobbyBool[1] = check!;
+              });
+            }),
+            CheckboxListTile(
+              title: Text(_hobbyList[2]),
+              value: _hobbyBool[2], onChanged: (check){
+              setState(() {
+                _hobbyBool[2] = check!;
+              });
+            }),
+            Text(
+                'Your information\nName is : ${_name.text}\nPassword is : ${_password.text}\nAddress is : ${_address.text}'
+                '\nHobbies are : ${hobbyString()}')
+          ],
+        ),
       ),
     );
+  }
+  String? hobbyString(){
+    String _hobby = '';
+    for(int i=0; i<_hobbyBool.length; i++){
+      if(_hobbyBool[i]){
+        _hobby += _hobbyList[i];
+      }      
+    }
+    return _hobby;
   }
 }
