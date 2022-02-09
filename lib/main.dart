@@ -29,26 +29,33 @@
 // 6 3 3
 //position
 
-
 // @12.18 Flutter Basic UI (Introduction to Stateful Widget)
+// @12.19 Flutter Basic UI [TextField Widget]
 import 'package:flutter/material.dart';
 
-void main(){
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyApp(),
-    )
-  );
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
+  ));
 }
+
 class MyApp extends StatefulWidget {
-  const MyApp({ Key? key }) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
+  TextEditingController _name = TextEditingController();
+  TextEditingController _password = TextEditingController();
+  TextEditingController _address = TextEditingController();
+  @override
+  void initState() {
+    _name.text = "Initial Name";
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,15 +63,56 @@ class _MyAppState extends State<MyApp> {
         centerTitle: true,
         title: Text('Introduction to Stateful Widget'),
       ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _name,
+              decoration: InputDecoration(
+                  labelText: 'Name',
+                  hintText: 'Enter your name',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  )),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _password,
+              // scrollPadding: EdgeInsets.all(0),
+              obscureText: true,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  // contentPadding: EdgeInsets.zero,
+                  hintText: 'Enter your password',
+                  labelText: 'Password',
+                  suffixIcon: Icon(Icons.visibility)),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _address,
+              decoration: InputDecoration(
+                  label: Text('Address'), hintText: 'Enter your address'),
+              minLines: 2,
+              maxLines: 5,
+            ),
+          ),
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _address.text = '';
+                });
+              },
+              child: Text('Save')),
+          Text(
+              'Your information is\nName is : ${_name.text}\nPassword is : ${_password.text}\nAddress is : ${_address.text}')
+        ],
+      ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
