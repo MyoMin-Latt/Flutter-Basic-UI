@@ -12,9 +12,7 @@
 // @12.11 Flutter Basic Widget(Button Part1), ElevatedButton.styleFrom()
 // @12.12 Flutter Basic UI (Button Part 2)
 // @12.13 Flutter Basic UI (Stack Layout), Positioned
-
-
-
+// @12.14 (Stack interactive UI) https://youtu.be/buhVyKjkDtY
 
 import 'package:flutter/material.dart';
 
@@ -41,37 +39,63 @@ class FirstApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(),
-       body: Stack(
-         alignment: Alignment.center,
-         clipBehavior: Clip.none,
-         children: [
-           Container(
-             color: Colors.red,
-             width: double.infinity,
-             height: 200,
-           ),
-           Positioned(
-             top : 150,
-             left: 100,
-             child: Container(
-               color: Colors.green,
-               width: 200,
-               height: 100,
-             ),
-           ),
-           const Text('Stack Lesson',
-           style: TextStyle(color: Colors.white,fontSize: 20,
-           fontWeight: FontWeight.bold),),
-           Positioned(
-             top: 220,
-             left: 160,
-             child: ElevatedButton(onPressed: (){}, 
-             child: const Text('Buttton')))
-         ],
-       ),
-      
-       );
+        appBar: AppBar(),
+        body: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20))),
+              width: double.infinity,
+              height: 200,
+            ),
+            Positioned(
+              top: 20,
+              left: 0,
+              right: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Home',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Settings',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Profile',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            Positioned(
+              top: 80,
+              left: 9,
+              right: 9,
+              child: Container(
+                height: 200,
+                child: Card(
+                  elevation: 10,
+                  color: Colors.white,
+                ),
+              ),
+            )
+          ],
+        ));
   }
-  
 }
