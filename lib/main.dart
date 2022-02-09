@@ -32,6 +32,8 @@
 // @12.18 Flutter Basic UI (Introduction to Stateful Widget)
 // @12.19 Flutter Basic UI [TextField Widget]
 // @12.20 Flutter Basic UI [CheckBox Widget] forloop
+// @12.21 Flutter Basic UI (Radio Button Widget)
+
 
 import 'package:flutter/material.dart';
 
@@ -55,6 +57,8 @@ class _MyAppState extends State<MyApp> {
   TextEditingController _address = TextEditingController();
   List<bool> _hobbyBool = [false, false, false];
   List<String> _hobbyList =['Reading', 'Swimming', 'Walking'];
+  List<String> _genderList = ['Male', 'Female'];
+  String _genderValue = 'Male';
   String _hobby = '';
   
   @override
@@ -132,9 +136,31 @@ class _MyAppState extends State<MyApp> {
                 _hobbyBool[2] = check!;
               });
             }),
+            Column(
+              children: [
+                RadioListTile(
+                  title: Text('Male'),
+                  value: _genderList[0], groupValue: _genderValue, 
+                onChanged: (val){
+                  setState(() {
+                    // _genderValue = _genderList[0];
+                    _genderValue = val.toString();
+                  });
+                }),
+                RadioListTile(
+                  title: Text('Female'),
+                  value: _genderList[1], groupValue: _genderValue, 
+                onChanged: (change){
+                  setState(() {
+                    _genderValue = change.toString();
+                  });
+                })
+              ],
+            ),
             Text(
                 'Your information\nName is : ${_name.text}\nPassword is : ${_password.text}\nAddress is : ${_address.text}'
-                '\nHobbies are : ${hobbyString()}')
+                '\nHobbies are : ${hobbyString()}'
+                '\nGender is : ${_genderValue}')
           ],
         ),
       ),
