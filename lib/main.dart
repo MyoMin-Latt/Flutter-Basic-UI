@@ -14,7 +14,7 @@
 // @12.13 Flutter Basic UI (Stack Layout), Positioned, container
 // @12.14 (Stack interactive UI) https://youtu.be/buhVyKjkDtY
 // @12.15 Flutter Basic UI (ListView & Card Widget) Inkwell
-// @12.16 Flutter Basic UI (GridView) SliverGridDelegateWithFixedCrossAxisCount
+// @12.16 Flutter Basic UI (GridView) SliverGridDelegateWithMaxCrossAxisExtent, SliverGridDelegateWithFixedCrossAxisCount
 
 
 
@@ -45,10 +45,10 @@ class FirstApp extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(),
         body: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 130,
               mainAxisExtent: 50,
               // childAspectRatio: 3/1,
-              crossAxisCount: 2,
                 mainAxisSpacing: 3.0,
                 crossAxisSpacing: 3.0
             ),
