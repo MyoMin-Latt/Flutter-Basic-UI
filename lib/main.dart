@@ -15,8 +15,8 @@
 // @12.14 (Stack interactive UI) https://youtu.be/buhVyKjkDtY
 // @12.15 Flutter Basic UI (ListView & Card Widget) Inkwell
 // @12.16 Flutter Basic UI (GridView) SliverGridDelegateWithMaxCrossAxisExtent, SliverGridDelegateWithFixedCrossAxisCount
-
-import 'package:flutter/material.dart';
+// @12.17 Practical UI Building [Contact List UI)
+//        https://randomuser.me/photos, https://flutterawesome.com/searchable-listview-with-flutter/
 
 //Google => Material
 //Iphone => Cupertino
@@ -28,53 +28,43 @@ import 'package:flutter/material.dart';
 //variable List Map Set
 // 6 3 3
 //position
-void main() {
-  runApp(MaterialApp(
-    theme: ThemeData.dark(),
-    // themeMode: ThemeMode.dark,
-    debugShowCheckedModeBanner: false,
-    home: FirstApp(),
-  ));
+
+
+// @12.18 Flutter Basic UI (Introduction to Stateful Widget)
+import 'package:flutter/material.dart';
+
+void main(){
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyApp(),
+    )
+  );
+}
+class MyApp extends StatefulWidget {
+  const MyApp({ Key? key }) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
 }
 
-class FirstApp extends StatelessWidget {
-  List<_contactObject> _contactList = [
-    _contactObject('https://randomuser.me/api/portraits/women/81.jpg', 'Ma Ma', '@mama'),
-    _contactObject('https://randomuser.me/api/portraits/women/82.jpg', 'Su Su', '@susu'),
-    _contactObject('https://randomuser.me/api/portraits/women/83.jpg', 'Mu Mu', '@mumu'),
-    _contactObject('https://randomuser.me/api/portraits/women/84.jpg', 'Maw Maw', '@mawmaw'),
-    _contactObject('https://randomuser.me/api/portraits/women/85.jpg', 'Mee Mee', '@meemee'),
-  ];
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Contact List'),
+        title: Text('Introduction to Stateful Widget'),
       ),
-      body: ListView.builder(
-        itemCount: _contactList.length,
-        itemBuilder: (BuildContext context, int position){
-          return _contactListTile(_contactList[position]);
-        }
-      ),
-    );
-  }
-  Widget _contactListTile(_contactObject contactObject){
-    return ListTile(
-      leading: CircleAvatar(
-        radius: 30,
-        backgroundImage: NetworkImage(contactObject.url)),
-      title: Text(contactObject.name),
-      subtitle: Text(contactObject.id),
-      trailing: ElevatedButton(onPressed: (){}, child: Text('Follow')),
     );
   }
 }
 
-class _contactObject{
-  String url;
-  String name;
-  String id;
-  _contactObject(this.url, this.name, this.id);
-}
+
+
+
+
+
+
+
+
