@@ -11,8 +11,10 @@
 // @12.10 Flutter Basic UI (Wrap Widget), SingleChildScrollView, For Loop
 // @12.11 Flutter Basic Widget(Button Part1), ElevatedButton.styleFrom()
 // @12.12 Flutter Basic UI (Button Part 2)
-// @12.13 Flutter Basic UI (Stack Layout), Positioned
+// @12.13 Flutter Basic UI (Stack Layout), Positioned, container
 // @12.14 (Stack interactive UI) https://youtu.be/buhVyKjkDtY
+// @12.15 Flutter Basic UI (ListView & Card Widget) Inkwell
+
 
 import 'package:flutter/material.dart';
 
@@ -27,75 +29,44 @@ import 'package:flutter/material.dart';
 // 6 3 3
 //position
 void main() {
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: FirstApp(),
   ));
 }
 
 class FirstApp extends StatelessWidget {
-  const FirstApp({Key? key}) : super(key: key);
-
+  List<String> list = List.generate(100, (index) => 'Item $index');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        body: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20))),
-              width: double.infinity,
-              height: 200,
-            ),
-            Positioned(
-              top: 20,
-              left: 0,
-              right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    'Home',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    'Settings',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    'Profile',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-            ),
-            Positioned(
-              top: 80,
-              left: 9,
-              right: 9,
-              child: Container(
-                height: 200,
-                child: Card(
-                  elevation: 10,
-                  color: Colors.white,
-                ),
-              ),
-            )
-          ],
-        ));
+        body: ListView.builder(
+          itemCount: list.length,
+          itemBuilder: (BuildContext context, int position){
+            return InkWell(
+              onTap: (){
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(list[position]), 
+                  action: SnackBarAction(label: 'Cancel', onPressed: (){},),)
+                );
+              },
+              child: Card(
+                margin: EdgeInsets.all(2),
+                elevation: 0,
+                child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(list[position]),
+              )),
+            );
+          }
+        ),
+        // body: ListView(
+        //   children: [
+        //     for (var item in list)
+        //     Text(item)
+        //   ],
+        // )
+        );
   }
 }
