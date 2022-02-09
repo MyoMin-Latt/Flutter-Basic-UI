@@ -10,6 +10,9 @@
 //        Expanded => take all space, Flexible => take needed space
 // @12.10 Flutter Basic UI (Wrap Widget), SingleChildScrollView, For Loop
 // @12.11 Flutter Basic Widget(Button Part1), ElevatedButton.styleFrom()
+// @12.12 Flutter Basic UI (Button Part 2)
+// @12.13 Flutter Basic UI (Stack Layout), Positioned
+
 
 
 
@@ -24,6 +27,7 @@ import 'package:flutter/material.dart';
 //Row Column Wrap Stack  ListVeiw GridView
 //variable List Map Set
 // 6 3 3
+//position
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -38,51 +42,36 @@ class FirstApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(),
-       body: Center(
-         child: Column(
-           children: [
-             ElevatedButton.icon(
-               icon: Icon(Icons.add_a_photo),
-               onPressed: (){
-                    clickAction(context);
-               }, 
-               onLongPress: () => print('long press'),
-               style: ElevatedButton.styleFrom(
-                 primary: Colors.red,
-                 onPrimary: Colors.white,
-
-               ),
-               label: const Text('Elevated Buttton Clcik')),
-             OutlinedButton(
-               style: OutlinedButton.styleFrom(
-                 primary: Colors.red,
-                 side: const BorderSide(
-                   color: Colors.red,
-                   width: 3
-                 )
-                 
-               ),
-               onPressed: (){
-             }, 
-             child: const Text('Outlined Button')),
-             TextButton(
-               style: TextButton.styleFrom(
-                 primary: Colors.black
-               ),
-               onPressed: (){
-             }, child: const Text('Text Button'))
-           ],
-         ),
-       )
+       body: Stack(
+         alignment: Alignment.center,
+         clipBehavior: Clip.none,
+         children: [
+           Container(
+             color: Colors.red,
+             width: double.infinity,
+             height: 200,
+           ),
+           Positioned(
+             top : 150,
+             left: 100,
+             child: Container(
+               color: Colors.green,
+               width: 200,
+               height: 100,
+             ),
+           ),
+           const Text('Stack Lesson',
+           style: TextStyle(color: Colors.white,fontSize: 20,
+           fontWeight: FontWeight.bold),),
+           Positioned(
+             top: 220,
+             left: 160,
+             child: ElevatedButton(onPressed: (){}, 
+             child: const Text('Buttton')))
+         ],
+       ),
+      
        );
   }
-  void clickAction(BuildContext context){
-    ScaffoldMessenger.of(context)
-    .showSnackBar(
-      
-      const SnackBar(
-        backgroundColor: Colors.blue,
-        content: Text('Elevated Button is Clicked'))
-    );
-  }
+  
 }
