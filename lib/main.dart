@@ -9,6 +9,8 @@
 // @12.9 Flutter Basic UI (Row and Column), Expanded, Flexible
 //        Expanded => take all space, Flexible => take needed space
 // @12.10 Flutter Basic UI (Wrap Widget), SingleChildScrollView, For Loop
+// @12.11 Flutter Basic Widget(Button Part1), ElevatedButton.styleFrom()
+
 
 
 import 'package:flutter/material.dart';
@@ -35,25 +37,52 @@ class FirstApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.black,
-          child: SingleChildScrollView(
-            child: Wrap(
-              textDirection: TextDirection.ltr,
-              direction: Axis.horizontal,
-              verticalDirection: VerticalDirection.down,
-              spacing: 8.0,
-              runSpacing: 38.0,
-              alignment: WrapAlignment.center,
-              children: [
-                for (int i = 0; i < 100; i++)
-                  ElevatedButton(onPressed: () {}, child: Text('Button $i'))
-              ],
-            ),
-          ),
-        ));
+       appBar: AppBar(),
+       body: Center(
+         child: Column(
+           children: [
+             ElevatedButton.icon(
+               icon: Icon(Icons.add_a_photo),
+               onPressed: (){
+                    clickAction(context);
+               }, 
+               onLongPress: () => print('long press'),
+               style: ElevatedButton.styleFrom(
+                 primary: Colors.red,
+                 onPrimary: Colors.white,
+
+               ),
+               label: const Text('Elevated Buttton Clcik')),
+             OutlinedButton(
+               style: OutlinedButton.styleFrom(
+                 primary: Colors.red,
+                 side: const BorderSide(
+                   color: Colors.red,
+                   width: 3
+                 )
+                 
+               ),
+               onPressed: (){
+             }, 
+             child: const Text('Outlined Button')),
+             TextButton(
+               style: TextButton.styleFrom(
+                 primary: Colors.black
+               ),
+               onPressed: (){
+             }, child: const Text('Text Button'))
+           ],
+         ),
+       )
+       );
+  }
+  void clickAction(BuildContext context){
+    ScaffoldMessenger.of(context)
+    .showSnackBar(
+      
+      const SnackBar(
+        backgroundColor: Colors.blue,
+        content: Text('Elevated Button is Clicked'))
+    );
   }
 }
