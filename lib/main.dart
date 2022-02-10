@@ -38,8 +38,7 @@
 // @12.23 Flutter Basic UI [Slider Widget]
 //        Continuous sliders, Discrete sliders, Range slider, SliderTheme in MaterilApp
 // @12.24 Flutter Basic UI (Switch Widget) ternary operator
-
-
+// @12.25 Flutter Basic UI (Form Widget) globalkey
 
 import 'package:flutter/material.dart';
 
@@ -49,8 +48,9 @@ void main() {
     home: MyApp(),
   ));
 }
+
 class MyApp extends StatelessWidget {
-  const MyApp({ Key? key }) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,33 +59,119 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class Home extends StatefulWidget {
-  const Home({ Key? key }) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  bool _value = false;
+  final _email = TextEditingController();
+  String? name, age, address, phone, email;
+  final _formKey = GlobalKey<FormState>();
+  // final GlobalKey _formKey = GlobalKey<FormState>(); // has error in save
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(_value? "Swich is on": 'Switch is off'),
-      ),
-      body: Center(
-        child: Switch(
-          activeColor: Colors.green,
-          activeTrackColor: Colors.blue,
-          inactiveTrackColor: Colors.grey,
-          inactiveThumbColor: Colors.red[400],
-          value: _value, onChanged: (val){setState(() {
-          setState(() {
-            _value = val;
-          });
-        });}),
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Form(
+            key: _formKey,
+            child: ListView(
+              children: [
+                Text('Enter Name *'),
+                TextFormField(
+                  onSaved: (name) {
+                    this.name = name;
+                  },
+                  validator: (name) {
+                    if (name == null || name.isEmpty) {
+                      return 'Enter your name';
+                    }
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Enter your name',
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text('Enter age *'),
+                TextFormField(
+                  onSaved: (age) {
+                    this.age = age;
+                  },
+                  validator: (name) {
+                    if (name == null || name.isEmpty) {
+                      return 'Enter your age';
+                    }
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Enter your age',
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text('Enter Address *'),
+                TextFormField(
+                  onSaved: (address) {
+                    this.address = address;
+                  },
+                  validator: (name) {
+                    if (name == null || name.isEmpty) {
+                      return 'Enter your Address';
+                    }
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Enter your Address',
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text('Enter Phone *'),
+                TextFormField(
+                  onSaved: (phone) {
+                    this.phone = phone;
+                  },
+                  validator: (name) {
+                    if (name == null || name.isEmpty) {
+                      return 'Enter your Phone';
+                    }
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Enter your Phone',
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text('Enter Email'),
+                TextFormField(
+                  controller: _email,
+                  onSaved: (email) {
+                    this.email = email;
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Enter your Email',
+                  ),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      _formKey.currentState!.save();
+                      _formKey.currentState!.validate();
+                      print(
+                          '$name $age $address $phone $email'); // using variable
+                      print(_email.text); // using textingeditingcontroller
+                      // _formKey.currentState!.reset();
+                    },
+                    child: Text('Save'))
+              ],
+            )),
       ),
     );
   }
