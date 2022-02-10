@@ -33,9 +33,12 @@
 // @12.19 Flutter Basic UI [TextField Widget]
 // @12.20 Flutter Basic UI [CheckBox Widget] forloop
 // @12.21 Flutter Basic UI (Radio Button Widget)
+// @12.22 Flutter Basic UI [Progress Indicator]
+//        Increase value in the state but cannot increase value in the build
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -45,135 +48,64 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({ Key? key }) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  TextEditingController _name = TextEditingController();
-  TextEditingController _password = TextEditingController();
-  TextEditingController _address = TextEditingController();
-  List<bool> _hobbyBool = [false, false, false];
-  List<String> _hobbyList =['Reading', 'Swimming', 'Walking'];
-  List<String> _genderList = ['Male', 'Female'];
-  String _genderValue = 'Male';
-  String _hobby = '';
-  
+  double _value = 0.01; // increase value
   @override
   Widget build(BuildContext context) {
+    // double _value = 0.0; // cannot increase value
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Introduction to Stateful Widget'),
+        title: Text('Progress Indicator'),
       ),
-      body: SingleChildScrollView(
+      body: Center(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _name,
-                decoration: InputDecoration(
-                    labelText: 'Name',
-                    hintText: 'Enter your name',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    )),
-              ),
+            CircularProgressIndicator(),
+            Divider(color: Colors.black, height: 60,),
+            CircularProgressIndicator.adaptive(),
+            Divider(color: Colors.black, height: 60,),
+            LinearProgressIndicator(),
+            Divider(color: Colors.black, height: 60,),
+            LinearProgressIndicator(
+              value: _value,
+              color: Colors.red,
+              backgroundColor: Colors.green,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: TextField(
-                controller: _password,
-                // scrollPadding: EdgeInsets.all(0),
-                obscureText: true,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    // contentPadding: EdgeInsets.zero,
-                    hintText: 'Enter your password',
-                    labelText: 'Password',
-                    suffixIcon: Icon(Icons.visibility)),
-              ),
+            Divider(color: Colors.black, height: 60,),
+            CircularProgressIndicator(
+              value: _value,
+              color: Colors.red,
+              backgroundColor: Colors.green,
+              strokeWidth: 12,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _address,
-                decoration: InputDecoration(
-                    label: Text('Address'), hintText: 'Enter your address'),
-                minLines: 2,
-                maxLines: 5,
-              ),
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    // _address.text = '';
-                  });
-                },
-                child: Text('Save')),
-            CheckboxListTile(
-              title: Text(_hobbyList[0]),
-              value: _hobbyBool[0], onChanged: (check){
-              setState(() {
-                _hobbyBool[0] = check!;
-              });
-            }),
-            CheckboxListTile(
-              title: Text(_hobbyList[1]),
-              value: _hobbyBool[1], onChanged: (check){
-              setState(() {
-                _hobbyBool[1] = check!;
-              });
-            }),
-            CheckboxListTile(
-              title: Text(_hobbyList[2]),
-              value: _hobbyBool[2], onChanged: (check){
-              setState(() {
-                _hobbyBool[2] = check!;
-              });
-            }),
-            Column(
+            Divider(color: Colors.black, height: 60,),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                RadioListTile(
-                  title: Text('Male'),
-                  value: _genderList[0], groupValue: _genderValue, 
-                onChanged: (val){
-                  setState(() {
-                    // _genderValue = _genderList[0];
-                    _genderValue = val.toString();
-                  });
-                }),
-                RadioListTile(
-                  title: Text('Female'),
-                  value: _genderList[1], groupValue: _genderValue, 
-                onChanged: (change){
-                  setState(() {
-                    _genderValue = change.toString();
-                  });
-                })
-              ],
-            ),
-            Text(
-                'Your information\nName is : ${_name.text}\nPassword is : ${_password.text}\nAddress is : ${_address.text}'
-                '\nHobbies are : ${hobbyString()}'
-                '\nGender is : ${_genderValue}')
+              OutlinedButton(onPressed: (){
+                setState(() {
+                  _value += 0.1;
+                });
+              }, child: Text("+")),
+              OutlinedButton(onPressed: (){
+                setState(() {
+                  _value -= 0.1;
+                });
+              }, child: Text("-")),
+            ],),
+            Divider(color: Colors.black, height: 30,),
           ],
         ),
       ),
     );
-  }
-  String? hobbyString(){
-    String _hobby = '';
-    for(int i=0; i<_hobbyBool.length; i++){
-      print(i.toString() + 'number');
-      if(_hobbyBool[i]){
-        _hobby += _hobbyList[i] + " ";
-      }      
-    }
-    return _hobby;
   }
 }
