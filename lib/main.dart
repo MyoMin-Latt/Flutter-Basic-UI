@@ -35,77 +35,90 @@
 // @12.21 Flutter Basic UI (Radio Button Widget)
 // @12.22 Flutter Basic UI [Progress Indicator] Determinate and indeterminate inidicator
 //        Increase value in the state but cannot increase value in the build
-
+// @12.23 Flutter Basic UI [Slider Widget]
+//        Continuous sliders, Discrete sliders, Range slider, SliderTheme in MaterilApp
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 void main() {
   runApp(MaterialApp(
+    theme: ThemeData(
+      sliderTheme: SliderThemeData(
+        thumbColor: Colors.green,
+        inactiveTrackColor: Colors.black,
+        activeTrackColor: Colors.blue,
+        valueIndicatorColor: Colors.blue,
+        valueIndicatorTextStyle: TextStyle(
+          fontWeight: FontWeight.bold, color: Colors.white
+        ),
+        activeTickMarkColor: Colors.white,
+        inactiveTickMarkColor: Colors.white,
+        
+      )
+    ),
     debugShowCheckedModeBanner: false,
     home: MyApp(),
   ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({ Key? key }) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  double _value = 0.01; // increase value
+  double _value1 = 0;
+  double _value2 = 0;
+  RangeValues _value3 = const RangeValues(30, 70);
   @override
   Widget build(BuildContext context) {
-    // double _value = 0.0; // cannot increase value
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Progress Indicator'),
-      ),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        appBar: AppBar(),
+        body: Column(
           children: [
-            CircularProgressIndicator(),
-            Divider(color: Colors.black, height: 60,),
-            CircularProgressIndicator.adaptive(),
-            Divider(color: Colors.black, height: 60,),
-            LinearProgressIndicator(),
-            Divider(color: Colors.black, height: 60,),
-            LinearProgressIndicator(
-              value: _value,
-              color: Colors.red,
-              backgroundColor: Colors.green,
-            ),
-            Divider(color: Colors.black, height: 60,),
-            CircularProgressIndicator(
-              value: _value,
-              color: Colors.red,
-              backgroundColor: Colors.green,
-              strokeWidth: 12,
-            ),
-            Divider(color: Colors.black, height: 60,),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-              OutlinedButton(onPressed: (){
-                setState(() {
-                  _value += 0.1;
-                });
-              }, child: Text("+")),
-              OutlinedButton(onPressed: (){
-                setState(() {
-                  _value -= 0.1;
-                });
-              }, child: Text("-")),
-            ],),
-            Divider(color: Colors.black, height: 30,),
+            Slider(
+                // Continuous sliders
+                min: 0,
+                max: 100,
+                value: _value1,
+                // divisions: 100,
+                // label: _value1.toInt().toString(), // need division
+                onChanged: (val) {
+                  setState(() {
+                    _value1 = val;
+                  });
+                }),
+            Slider(
+                // Discrete sliders
+                // activeColor: Colors.red,
+                // inactiveColor: Colors.green,
+                // thumbColor: Colors.blue,
+                min: 0,
+                max: 100,
+                divisions: 10,
+                label: _value2.toInt().toString(), // need division
+                value: _value2,
+                onChanged: (val) {
+                  setState(() {
+                    _value2 = val;
+                  });
+                }),
+            RangeSlider(
+                // Range slider
+                min: 0,
+                max: 100,
+                divisions: 10,
+                labels: RangeLabels(_value3.start.toInt().toString(),
+                    _value3.end.round().toString()),
+                values: _value3,
+                onChanged: (val) {
+                  setState(() {
+                    _value3 = val;
+                  });
+                })
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
