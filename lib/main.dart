@@ -33,7 +33,7 @@
 // @12.19 Flutter Basic UI [TextField Widget]
 // @12.20 Flutter Basic UI [CheckBox Widget] forloop
 // @12.21 Flutter Basic UI (Radio Button Widget)
-// @12.22 Flutter Basic UI [Progress Indicator]
+// @12.22 Flutter Basic UI [Progress Indicator] Determinate and indeterminate inidicator
 //        Increase value in the state but cannot increase value in the build
 
 
