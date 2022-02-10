@@ -37,88 +37,56 @@
 //        Increase value in the state but cannot increase value in the build
 // @12.23 Flutter Basic UI [Slider Widget]
 //        Continuous sliders, Discrete sliders, Range slider, SliderTheme in MaterilApp
+// @12.24 Flutter Basic UI (Switch Widget) ternary operator
+
+
 
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    theme: ThemeData(
-      sliderTheme: SliderThemeData(
-        thumbColor: Colors.green,
-        inactiveTrackColor: Colors.black,
-        activeTrackColor: Colors.blue,
-        valueIndicatorColor: Colors.blue,
-        valueIndicatorTextStyle: TextStyle(
-          fontWeight: FontWeight.bold, color: Colors.white
-        ),
-        activeTickMarkColor: Colors.white,
-        inactiveTickMarkColor: Colors.white,
-        
-      )
-    ),
     debugShowCheckedModeBanner: false,
     home: MyApp(),
   ));
 }
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({ Key? key }) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Home(),
+    );
+  }
+}
+class Home extends StatefulWidget {
+  const Home({ Key? key }) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
 }
 
-class _MyAppState extends State<MyApp> {
-  double _value1 = 0;
-  double _value2 = 0;
-  RangeValues _value3 = const RangeValues(30, 70);
+class _HomeState extends State<Home> {
+  bool _value = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: Column(
-          children: [
-            Slider(
-                // Continuous sliders
-                min: 0,
-                max: 100,
-                value: _value1,
-                // divisions: 100,
-                // label: _value1.toInt().toString(), // need division
-                onChanged: (val) {
-                  setState(() {
-                    _value1 = val;
-                  });
-                }),
-            Slider(
-                // Discrete sliders
-                // activeColor: Colors.red,
-                // inactiveColor: Colors.green,
-                // thumbColor: Colors.blue,
-                min: 0,
-                max: 100,
-                divisions: 10,
-                label: _value2.toInt().toString(), // need division
-                value: _value2,
-                onChanged: (val) {
-                  setState(() {
-                    _value2 = val;
-                  });
-                }),
-            RangeSlider(
-                // Range slider
-                min: 0,
-                max: 100,
-                divisions: 10,
-                labels: RangeLabels(_value3.start.toInt().toString(),
-                    _value3.end.round().toString()),
-                values: _value3,
-                onChanged: (val) {
-                  setState(() {
-                    _value3 = val;
-                  });
-                })
-          ],
-        ));
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(_value? "Swich is on": 'Switch is off'),
+      ),
+      body: Center(
+        child: Switch(
+          activeColor: Colors.green,
+          activeTrackColor: Colors.blue,
+          inactiveTrackColor: Colors.grey,
+          inactiveThumbColor: Colors.red[400],
+          value: _value, onChanged: (val){setState(() {
+          setState(() {
+            _value = val;
+          });
+        });}),
+      ),
+    );
   }
 }
