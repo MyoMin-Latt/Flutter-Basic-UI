@@ -85,47 +85,57 @@ class MyApp extends StatelessWidget {
           Positioned(
             left: 30,
             right: 30,
-            bottom: 180,
-            child: Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10),
-                      hintText: 'Email or Phone number',
-                    ),
+            bottom: 20,
+            child: Column(
+              children: [
+                Card(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide.none),
+                          contentPadding: EdgeInsets.all(10),
+                          hintText: 'Email or Phone number',
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide.none),
+                          contentPadding: EdgeInsets.all(10),
+                          hintText: 'Password'
+                        ),
+                      ),
+                      
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  TextField(
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10),
-                      hintText: 'Password'
-                    ),
+                ),
+                SizedBox(height: 30,),
+                Container(
+                  height: 50,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: LinearGradient(colors: [
+                      Color.fromRGBO(143, 148, 251, 1),
+	                          Color.fromRGBO(143, 148, 251, .6),
+                    ])
                   ),
-                  
-                ],
-              ),
+                  child: Center(child: Text('Login', style: TextStyle(
+                    fontSize: 15, fontWeight: FontWeight.bold,
+                    color: Colors.white),)),
+                ),
+                SizedBox(height: 40,),
+
+                TextButton(onPressed: (){}, 
+                child: Text('Forgot Password?',
+                style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),))
+              ],
             ),
           ),
-          Positioned(
-            bottom: 100,
-            right: 30,
-            left: 30,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                // primary: LinearGradient(colors: [Colors.black, Colors.white])
-              ),
-              onPressed: (){}, child: Text('Login'))),
-
-          Positioned(
-            bottom: 35,
-            right: 30,
-            left: 30,
-            child: TextButton(onPressed: (){}, child: Text(
-              'Forgot Password?',
-              style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),)))
-
+          
+         
         ],
       ),
     );
