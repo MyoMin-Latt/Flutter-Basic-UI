@@ -40,138 +40,93 @@
 // @12.24 Flutter Basic UI (Switch Widget) ternary operator
 // @12.25 Flutter Basic UI (Form Widget) globalkey
 
+// @12 HW1 [HomeWork Login UI]
+
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: MyApp(),
-  ));
+void main(){
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyApp(),
+    )
+  );
 }
-
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({ Key? key }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
-    );
-  }
-}
-
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  final _email = TextEditingController();
-  String? name, age, address, phone, email;
-  final _formKey = GlobalKey<FormState>();
-  // final GlobalKey _formKey = GlobalKey<FormState>(); // has error in save
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Form(
-            key: _formKey,
-            child: ListView(
-              children: [
-                Text('Enter Name *'),
-                TextFormField(
-                  onSaved: (name) {
-                    this.name = name;
-                  },
-                  validator: (name) {
-                    if (name == null || name.isEmpty) {
-                      return 'Enter your name';
-                    }
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Enter your name',
+      body: Stack(
+        children: [
+          Positioned(child: Container(color: Colors.white,)),
+          Image.network('https://raw.githubusercontent.com/Rubywai/rubylearner_homework/main/Login_Ui/images/background.png'),
+          Positioned(
+            left: 30,
+            child: Image.network('https://github.com/Rubywai/rubylearner_homework/blob/main/Login_Ui/images/light-1.png?raw=true')),
+          Positioned(
+            top: -20,
+            left: 150,
+            child: Image.network('https://github.com/Rubywai/rubylearner_homework/blob/main/Login_Ui/images/light-2.png?raw=true')),
+          Positioned(
+            right: 45,
+            top: 70,
+            child: Image.network('https://raw.githubusercontent.com/Rubywai/rubylearner_homework/main/Login_Ui/images/clock.png')),
+          Positioned(
+            top: 160,
+            right: 100,
+            // left: 0,
+            
+            child: Text('Login', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Colors.white),)),
+          
+          Positioned(
+            left: 30,
+            right: 30,
+            bottom: 180,
+            child: Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      hintText: 'Email or Phone number',
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text('Enter age *'),
-                TextFormField(
-                  onSaved: (age) {
-                    this.age = age;
-                  },
-                  validator: (name) {
-                    if (name == null || name.isEmpty) {
-                      return 'Enter your age';
-                    }
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Enter your age',
+                  SizedBox(height: 8),
+                  TextField(
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      hintText: 'Password'
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text('Enter Address *'),
-                TextFormField(
-                  onSaved: (address) {
-                    this.address = address;
-                  },
-                  validator: (name) {
-                    if (name == null || name.isEmpty) {
-                      return 'Enter your Address';
-                    }
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Enter your Address',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text('Enter Phone *'),
-                TextFormField(
-                  onSaved: (phone) {
-                    this.phone = phone;
-                  },
-                  validator: (name) {
-                    if (name == null || name.isEmpty) {
-                      return 'Enter your Phone';
-                    }
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Enter your Phone',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text('Enter Email'),
-                TextFormField(
-                  controller: _email,
-                  onSaved: (email) {
-                    this.email = email;
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Enter your Email',
-                  ),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      _formKey.currentState!.save();
-                      _formKey.currentState!.validate();
-                      print(
-                          '$name $age $address $phone $email'); // using variable
-                      print(_email.text); // using textingeditingcontroller
-                      // _formKey.currentState!.reset();
-                    },
-                    child: Text('Save'))
-              ],
-            )),
+                  
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 100,
+            right: 30,
+            left: 30,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                // primary: LinearGradient(colors: [Colors.black, Colors.white])
+              ),
+              onPressed: (){}, child: Text('Login'))),
+
+          Positioned(
+            bottom: 35,
+            right: 30,
+            left: 30,
+            child: TextButton(onPressed: (){}, child: Text(
+              'Forgot Password?',
+              style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),)))
+
+        ],
       ),
     );
   }
