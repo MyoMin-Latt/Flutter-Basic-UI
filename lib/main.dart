@@ -42,46 +42,55 @@
 
 // @12 HW1 [HomeWork Login UI]
 
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main(){
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyApp(),
-    )
-  );
+void main() {
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
+  ));
 }
+
 class MyApp extends StatelessWidget {
-  const MyApp({ Key? key }) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(child: Container(color: Colors.white,)),
-          Image.network('https://raw.githubusercontent.com/Rubywai/rubylearner_homework/main/Login_Ui/images/background.png'),
           Positioned(
-            left: 30,
-            child: Image.network('https://github.com/Rubywai/rubylearner_homework/blob/main/Login_Ui/images/light-1.png?raw=true')),
+              child: Container(
+            color: Colors.white,
+          )),
+          Image.network(
+              'https://raw.githubusercontent.com/Rubywai/rubylearner_homework/main/Login_Ui/images/background.png'),
           Positioned(
-            top: -20,
-            left: 150,
-            child: Image.network('https://github.com/Rubywai/rubylearner_homework/blob/main/Login_Ui/images/light-2.png?raw=true')),
+              left: 30,
+              child: Image.network(
+                  'https://github.com/Rubywai/rubylearner_homework/blob/main/Login_Ui/images/light-1.png?raw=true')),
           Positioned(
-            right: 45,
-            top: 70,
-            child: Image.network('https://raw.githubusercontent.com/Rubywai/rubylearner_homework/main/Login_Ui/images/clock.png')),
+              top: -20,
+              left: 150,
+              child: Image.network(
+                  'https://github.com/Rubywai/rubylearner_homework/blob/main/Login_Ui/images/light-2.png?raw=true')),
           Positioned(
-            top: 160,
-            right: 100,
-            // left: 0,
-            
-            child: Text('Login', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Colors.white),)),
-          
+              right: 45,
+              top: 70,
+              child: Image.network(
+                  'https://raw.githubusercontent.com/Rubywai/rubylearner_homework/main/Login_Ui/images/clock.png')),
+          const Positioned(
+              top: 160,
+              right: 100,
+              // left: 0,
+
+              child: Text(
+                'Login',
+                style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              )),
           Positioned(
             left: 30,
             right: 30,
@@ -91,51 +100,61 @@ class MyApp extends StatelessWidget {
                 Card(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      TextField(
+                      const TextField(
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide.none),
-                          contentPadding: EdgeInsets.all(10),
-                          hintText: 'Email or Phone number',
-                        ),
+                            border:
+                                OutlineInputBorder(borderSide: BorderSide.none),
+                            contentPadding: EdgeInsets.all(10),
+                            hintText: 'Email or Phone number',
+                            hintStyle: TextStyle(color: Colors.grey)),
                       ),
-                      SizedBox(height: 8),
-                      TextField(
+                      const SizedBox(height: 8),
+                      const TextField(
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide.none),
-                          contentPadding: EdgeInsets.all(10),
-                          hintText: 'Password'
-                        ),
+                            border:
+                                OutlineInputBorder(borderSide: BorderSide.none),
+                            contentPadding: EdgeInsets.all(10),
+                            hintText: 'Password',
+                            hintStyle: TextStyle(color: Colors.grey)),
                       ),
-                      
                     ],
                   ),
                 ),
-                SizedBox(height: 30,),
+                const SizedBox(
+                  height: 30,
+                ),
                 Container(
                   height: 50,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    gradient: LinearGradient(colors: [
-                      Color.fromRGBO(143, 148, 251, 1),
-	                          Color.fromRGBO(143, 148, 251, .6),
-                    ])
-                  ),
-                  child: Center(child: Text('Login', style: TextStyle(
-                    fontSize: 15, fontWeight: FontWeight.bold,
-                    color: Colors.white),)),
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: const LinearGradient(colors: [
+                        Color.fromRGBO(143, 148, 251, 1),
+                        Color.fromRGBO(143, 148, 251, .6),
+                      ])),
+                  child: const Center(
+                      child: Text(
+                    'Login',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  )),
                 ),
-                SizedBox(height: 40,),
-
-                TextButton(onPressed: (){}, 
-                child: Text('Forgot Password?',
-                style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),))
+                const SizedBox(
+                  height: 40,
+                ),
+                TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),
+                    ))
               ],
             ),
           ),
-          
-         
         ],
       ),
     );
